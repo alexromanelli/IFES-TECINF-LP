@@ -1,0 +1,17 @@
+Conjunto de atividades 01
+
+(1) Altere o programa de cadastro de alunos (com interface gráfica) para fazer validações dos campos do formulário de registro de aluno. Os campos devem ser validados segundo os seguintes critérios:
+
+(a) O campo matrícula não pode ser vazio e deve conter um número inteiro positivo.
+(b) O campo nome não pode ser vazio e deve conter pelo menos quatro caracteres.
+(c) O campo data de nascimento não pode ser vazio.
+(d) O campo sexo precisa ser definido.
+(e) O campo email não pode ser vazio.
+
+-> Observação: ao salvar um registro, a validação deve ser feita e o programa deve exibir mensagem de erro, caso os dados não sejam considerados válidos, e o formulário deve continuar sendo exibido.
+
+(2) Faça programas de cadastros semelhantes ao de cadastro de alunos, porém para registrar dados dos seguintes tipos:
+
+(a) Empresa (campos CNPJ, Inscrição Estadual, razão social, nome fantasia, optante simples nacional [s/n], estado, município)
+(b) Funcionário (campos nascimento, sexo [M/F], cargo, CEP, endereço, bairro, cidade, telefone, data admissão, data saída, observações)
+(c) Gado (campos número do brinco, nascimento, peso, valor [R$], sexo (M/F), raça, observações)
