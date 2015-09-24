@@ -35,7 +35,7 @@ public class TelaRegistroAluno extends javax.swing.JFrame {
             opcao = OPCAO_ALTERAR;
         }
         initComponents();
-        //getRootPane().setDefaultButton(bSalvar);
+        getRootPane().setDefaultButton(bSalvar);
         
         if (opcao == OPCAO_ALTERAR) {
             Aluno aluno = colecaoAlunos.get(indiceAluno);
@@ -93,15 +93,25 @@ public class TelaRegistroAluno extends javax.swing.JFrame {
                     case OPCAO_INSERIR:
                         Aluno aluno = new Aluno(matricula, nome, dataNascimento,
                             sexo, email);
-                        colecaoAlunos.add(aluno);
+                        AlunoDAO alunoDAO = PostgreSQLDAOFactory.getAlunoDAO();
+                        if (alunoDAO.inserirAluno(aluno)) {
+                            colecaoAlunos.add(aluno);
+                        }
                         break;
                     case OPCAO_ALTERAR:
                         aluno = colecaoAlunos.get(indiceAluno);
-                        aluno.setMatricula(matricula);
-                        aluno.setNome(nome);
-                        aluno.setDataNascimento(dataNascimento);
-                        aluno.setSexo(sexo);
-                        aluno.setEmail(email);
+                        
+                        Aluno copia = new Aluno(matricula, nome, 
+                                dataNascimento, sexo, email);
+                        alunoDAO = PostgreSQLDAOFactory.getAlunoDAO();
+                        if (alunoDAO.atualizarAluno(copia)) {
+                            aluno.setMatricula(matricula);
+                            aluno.setNome(nome);
+                            aluno.setDataNascimento(dataNascimento);
+                            aluno.setSexo(sexo);
+                            aluno.setEmail(email);
+                        }
+                        
                         break;
                 }
                 JOptionPane.showMessageDialog(null, "Registro foi salvo.");

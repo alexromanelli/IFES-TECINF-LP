@@ -7,7 +7,11 @@ package cadastrodealunosswing;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
@@ -19,6 +23,27 @@ class ModeloTabelaAluno extends AbstractTableModel {
 
     public ModeloTabelaAluno(ArrayList<Aluno> alunos) {
         colecaoAlunos = alunos;
+        carregarDoBD();
+    }
+    
+    private void carregarDoBD() {
+        try {
+            AlunoDAO alunoDAO = PostgreSQLDAOFactory.getAlunoDAO();
+            ResultSet rs = alunoDAO.selecionarTodosAlunos();
+            rs.beforeFirst();
+            while (rs.next()) {
+                int matricula = rs.getInt(1);
+                String nome = rs.getString(2);
+                String dataNascimento = rs.getString(3);
+                char sexo = rs.getString(4).charAt(0);
+                String email = rs.getString(5);
+                Aluno aluno = new Aluno(matricula, nome, dataNascimento, 
+                        sexo, email);
+                colecaoAlunos.add(aluno);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ModeloTabelaAluno.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -82,13 +107,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tAlunos.getColumnModel().getColumn(2).setPreferredWidth(120);
         tAlunos.getColumnModel().getColumn(3).setPreferredWidth(50);
         tAlunos.getColumnModel().getColumn(4).setPreferredWidth(200);
-
-        colecaoAlunos.add(new Aluno(1, "Alexandre Romanelli", "25/03/1977", 'M',
-                "alexromanelli@gmail.com"));
-        colecaoAlunos.add(new Aluno(2, "Florinda", "01/08/1945", 'F',
-                "florinda@gmail.com"));
-        colecaoAlunos.add(new Aluno(24, "Wanderson", "20/05/1991", 'I',
-                "wanderson.safadinha24@hotmail.com"));
         definirManipuladores();
     }
 
@@ -131,8 +149,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         "Confirmação",
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-                    colecaoAlunos.remove(indAluno);
-                    atualizarTabela();
+                    AlunoDAO alunoDAO = PostgreSQLDAOFactory.getAlunoDAO();
+                    if (alunoDAO.excluirAluno(colecaoAlunos.get(indAluno))) {
+                        colecaoAlunos.remove(indAluno);
+                        atualizarTabela();
+                    }
                 }
             }
         });
@@ -175,14 +196,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(bRegistrarAluno)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(bAlterarRegistro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bRemoverRegistro)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(bRemoverRegistro)
+                        .addGap(0, 69, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,8 +215,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(bAlterarRegistro)
                     .addComponent(bRemoverRegistro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
