@@ -27,22 +27,22 @@ public class TelaListagemCurso extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        bRegistrarCurso = new javax.swing.JButton();
+        bAlterarCurso = new javax.swing.JButton();
+        bRemoverCurso = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tCursos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de curso - Listagem");
 
-        jButton1.setText("Registrar curso");
+        bRegistrarCurso.setText("Registrar curso");
 
-        jButton2.setText("Alterar curso");
+        bAlterarCurso.setText("Alterar curso");
 
-        jButton3.setText("Remover curso");
+        bRemoverCurso.setText("Remover curso");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tCursos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -53,7 +53,7 @@ public class TelaListagemCurso extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tCursos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -64,11 +64,11 @@ public class TelaListagemCurso extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 693, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(bRegistrarCurso)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(bAlterarCurso)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)
+                        .addComponent(bRemoverCurso)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -77,9 +77,9 @@ public class TelaListagemCurso extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(bRegistrarCurso)
+                    .addComponent(bAlterarCurso)
+                    .addComponent(bRemoverCurso))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
                 .addContainerGap())
@@ -124,10 +124,10 @@ public class TelaListagemCurso extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton bAlterarCurso;
+    private javax.swing.JButton bRegistrarCurso;
+    private javax.swing.JButton bRemoverCurso;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tCursos;
     // End of variables declaration//GEN-END:variables
 }
