@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cadastrodealunosswing.visao;
+package academico.visao;
 
 /**
  *
@@ -16,6 +16,7 @@ public class TelaListagemCurso extends javax.swing.JFrame {
      */
     public TelaListagemCurso() {
         initComponents();
+        tCursos.setModel(new ModeloTabelaCurso());
     }
 
     /**
@@ -42,17 +43,7 @@ public class TelaListagemCurso extends javax.swing.JFrame {
 
         bRemoverCurso.setText("Remover curso");
 
-        tCursos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        tCursos.setModel(new ModeloTabelaCurso());
         jScrollPane1.setViewportView(tCursos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

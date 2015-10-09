@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cadastrodealunosswing.visao;
+package academico.visao;
 
 /**
  *
  * @author alexromanelli
  */
-public class TelaListagemCurso extends javax.swing.JFrame {
+public class TelaListagemDisciplina extends javax.swing.JFrame {
 
     /**
      * Creates new form TelaListagemCurso
      */
-    public TelaListagemCurso() {
+    public TelaListagemDisciplina() {
         initComponents();
     }
 
@@ -27,22 +27,22 @@ public class TelaListagemCurso extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bRegistrarCurso = new javax.swing.JButton();
+        bRegistrarDisciplina = new javax.swing.JButton();
         bAlterarCurso = new javax.swing.JButton();
-        bRemoverCurso = new javax.swing.JButton();
+        bRemoverDisciplina = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tCursos = new javax.swing.JTable();
+        tDisciplinas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de curso - Listagem");
+        setTitle("Cadastro de disciplina - Listagem");
 
-        bRegistrarCurso.setText("Registrar curso");
+        bRegistrarDisciplina.setText("Registrar disciplina");
 
-        bAlterarCurso.setText("Alterar curso");
+        bAlterarCurso.setText("Alterar disciplina");
 
-        bRemoverCurso.setText("Remover curso");
+        bRemoverDisciplina.setText("Remover disciplina");
 
-        tCursos.setModel(new javax.swing.table.DefaultTableModel(
+        tDisciplinas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -53,7 +53,7 @@ public class TelaListagemCurso extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tCursos);
+        jScrollPane1.setViewportView(tDisciplinas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -64,11 +64,11 @@ public class TelaListagemCurso extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 693, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(bRegistrarCurso)
+                        .addComponent(bRegistrarDisciplina)
                         .addGap(18, 18, 18)
                         .addComponent(bAlterarCurso)
                         .addGap(18, 18, 18)
-                        .addComponent(bRemoverCurso)
+                        .addComponent(bRemoverDisciplina)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -77,9 +77,9 @@ public class TelaListagemCurso extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bRegistrarCurso)
+                    .addComponent(bRegistrarDisciplina)
                     .addComponent(bAlterarCurso)
-                    .addComponent(bRemoverCurso))
+                    .addComponent(bRemoverDisciplina))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
                 .addContainerGap())
@@ -105,29 +105,30 @@ public class TelaListagemCurso extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaListagemCurso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaListagemDisciplina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaListagemCurso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaListagemDisciplina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaListagemCurso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaListagemDisciplina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaListagemCurso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaListagemDisciplina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaListagemCurso().setVisible(true);
+                new TelaListagemDisciplina().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bAlterarCurso;
-    private javax.swing.JButton bRegistrarCurso;
-    private javax.swing.JButton bRemoverCurso;
+    private javax.swing.JButton bRegistrarDisciplina;
+    private javax.swing.JButton bRemoverDisciplina;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tCursos;
+    private javax.swing.JTable tDisciplinas;
     // End of variables declaration//GEN-END:variables
 }

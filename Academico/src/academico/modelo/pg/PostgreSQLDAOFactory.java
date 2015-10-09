@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cadastrodealunosswing.modelo.pg;
+package academico.modelo.pg;
 
-import cadastrodealunosswing.modelo.AlunoDAO;
+import academico.modelo.AlunoDAO;
+import academico.modelo.CursoDAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -51,6 +52,10 @@ public class PostgreSQLDAOFactory {
     
     public static AlunoDAO getAlunoDAO() {
         return new PgAlunoDAO();
+    }
+    
+    public static CursoDAO getCursoDAO() {
+        return new PgCursoDAO();
     }
     
 }

@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cadastrodealunosswing.visao;
+package academico.visao;
 
-import cadastrodealunosswing.modelo.pg.PostgreSQLDAOFactory;
-import cadastrodealunosswing.modelo.AlunoDAO;
-import cadastrodealunosswing.modelo.Aluno;
+import academico.modelo.pg.PostgreSQLDAOFactory;
+import academico.modelo.AlunoDAO;
+import academico.modelo.Aluno;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -118,7 +118,7 @@ public class TelaRegistroAluno extends javax.swing.JFrame {
                         break;
                 }
                 JOptionPane.showMessageDialog(null, "Registro foi salvo.");
-                TelaPrincipal.INSTANCIA.atualizarTabela();
+                TelaListagemAluno.INSTANCIA.atualizarTabela();
                 TelaRegistroAluno.this.setVisible(false);
             }
         });

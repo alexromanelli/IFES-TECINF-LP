@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cadastrodealunosswing.visao;
+package academico.visao;
 
-import cadastrodealunosswing.modelo.pg.PostgreSQLDAOFactory;
-import cadastrodealunosswing.modelo.AlunoDAO;
-import cadastrodealunosswing.modelo.Aluno;
+import academico.modelo.pg.PostgreSQLDAOFactory;
+import academico.modelo.AlunoDAO;
+import academico.modelo.Aluno;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -89,16 +89,16 @@ class ModeloTabelaAluno extends AbstractTableModel {
  *
  * @author alexromanelli
  */
-public class TelaPrincipal extends javax.swing.JFrame {
+public class TelaListagemAluno extends javax.swing.JFrame {
 
-    public static TelaPrincipal INSTANCIA;
+    public static TelaListagemAluno INSTANCIA;
 
     private ArrayList<Aluno> colecaoAlunos;
 
     /**
      * Creates new form TelaPrincipal
      */
-    public TelaPrincipal() {
+    public TelaListagemAluno() {
         INSTANCIA = this;
         initComponents();
         colecaoAlunos = new ArrayList<>();
@@ -181,7 +181,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tAlunos = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Alunos");
 
         bRegistrarAluno.setText("Registrar aluno");
@@ -242,20 +242,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaListagemAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaListagemAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaListagemAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaListagemAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaPrincipal().setVisible(true);
+                new TelaListagemAluno().setVisible(true);
             }
         });
     }

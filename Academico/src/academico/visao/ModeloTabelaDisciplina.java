@@ -3,40 +3,37 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package academico.modelo.pg;
+package academico.visao;
 
 import academico.modelo.Disciplina;
-import academico.modelo.DisciplinaDAO;
-import java.sql.ResultSet;
+import java.util.ArrayList;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author alexromanelli
  */
-public class PgDisciplinaDAO implements DisciplinaDAO {
+public class ModeloTabelaDisciplina extends AbstractTableModel {
+    
+    private ArrayList<Disciplina> colecaoDisciplinas;
 
     @Override
-    public boolean inserirDisciplina(Disciplina disciplina) {
+    public String getColumnName(int column) {
+        return super.getColumnName(column); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getRowCount() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean excluirDisciplina(Disciplina disciplina) {
+    public int getColumnCount() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean atualizarDisciplina(Disciplina disciplina) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ResultSet selecionarTodosDisciplinas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Disciplina encontrarDisciplina(int codDisciplina) {
+    public Object getValueAt(int rowIndex, int columnIndex) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

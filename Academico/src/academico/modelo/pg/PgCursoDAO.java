@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cadastrodealunosswing.modelo.pg;
+package academico.modelo.pg;
 
-import cadastrodealunosswing.modelo.Curso;
-import cadastrodealunosswing.modelo.CursoDAO;
+import academico.modelo.Curso;
+import academico.modelo.CursoDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
