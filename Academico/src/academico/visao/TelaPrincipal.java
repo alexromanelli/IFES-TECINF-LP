@@ -36,6 +36,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Controle Acadêmico");
 
+        mCadastros.setMnemonic('c');
         mCadastros.setText("Cadastros");
 
         miAluno.setMnemonic('a');

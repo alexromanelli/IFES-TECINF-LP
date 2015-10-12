@@ -7,7 +7,11 @@ package academico.modelo.pg;
 
 import academico.modelo.Disciplina;
 import academico.modelo.DisciplinaDAO;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,7 +36,26 @@ public class PgDisciplinaDAO implements DisciplinaDAO {
 
     @Override
     public ResultSet selecionarTodosDisciplinas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Connection con = PostgreSQLDAOFactory.getConnection();
+            PreparedStatement ps = con.prepareStatement(""
+                    + "select d.coddisciplina, d.nome, d.cargahoraria,"
+                    + "       d.ementa, c.codcurso, c.nome, c.cargahoraria,"
+                    + "       c.coordenador "
+                    + "from disciplina d "
+                    + " join curso c on (d.codcurso = c.codcurso) "
+                    + " order by d.nome",
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = ps.executeQuery();
+            return rs;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, 
+                    "Erro ao selecionar disciplinas.",
+                    "Erro", 
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        return null;
     }
 
     @Override

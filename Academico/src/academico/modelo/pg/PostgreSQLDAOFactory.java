@@ -7,6 +7,7 @@ package academico.modelo.pg;
 
 import academico.modelo.AlunoDAO;
 import academico.modelo.CursoDAO;
+import academico.modelo.DisciplinaDAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -56,6 +57,10 @@ public class PostgreSQLDAOFactory {
     
     public static CursoDAO getCursoDAO() {
         return new PgCursoDAO();
+    }
+
+    public static DisciplinaDAO getDisciplinaDAO() {
+        return new PgDisciplinaDAO(); // DAO = (D)ata (A)ccess (O)bject
     }
     
 }
