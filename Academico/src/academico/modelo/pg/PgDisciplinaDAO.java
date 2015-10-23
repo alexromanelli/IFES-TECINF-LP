@@ -21,17 +21,69 @@ public class PgDisciplinaDAO implements DisciplinaDAO {
 
     @Override
     public boolean inserirDisciplina(Disciplina disciplina) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Connection con = PostgreSQLDAOFactory.getConnection();
+            PreparedStatement ps = con.prepareStatement("insert into disciplina "
+                    + "(nome, cargahoraria, ementa, codcurso) "
+                    + "values (?, ?, ?, ?)");
+            ps.setString(1, disciplina.getNome());
+            ps.setInt(2, disciplina.getCargaHoraria());
+            ps.setString(3, disciplina.getEmenta());
+            ps.setInt(4, disciplina.getCurso().getCodCurso());
+            int r = ps.executeUpdate();
+            return r == 1;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, 
+                    "Erro ao inserir registro de disciplina",
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        return false;
     }
 
     @Override
     public boolean excluirDisciplina(Disciplina disciplina) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Connection con = PostgreSQLDAOFactory.getConnection();
+            PreparedStatement ps = con.prepareStatement("delete from disciplina "
+                    + "where coddisciplina = ?");
+            ps.setInt(1, disciplina.getCodDisciplina());
+            int r = ps.executeUpdate();
+            return r == 1;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, 
+                    "Erro ao excluir registro de disciplina",
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        return false;
     }
 
     @Override
     public boolean atualizarDisciplina(Disciplina disciplina) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Connection con = PostgreSQLDAOFactory.getConnection();
+            PreparedStatement ps = con.prepareStatement(
+                      "update disciplina "
+                    + "set nome = ?, "
+                    + "cargahoraria = ?, "
+                    + "ementa = ?, "
+                    + "codcurso = ? "
+                    + "where coddisciplina = ?");
+            ps.setString(1, disciplina.getNome());
+            ps.setInt(2, disciplina.getCargaHoraria());
+            ps.setString(3, disciplina.getEmenta());
+            ps.setInt(4, disciplina.getCurso().getCodCurso());
+            ps.setInt(5, disciplina.getCodDisciplina());
+            int r = ps.executeUpdate();
+            return r == 1;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, 
+                    "Erro ao atualizar registro de disciplina",
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        return false;
     }
 
     @Override

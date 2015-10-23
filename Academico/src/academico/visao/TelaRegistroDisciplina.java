@@ -5,17 +5,102 @@
  */
 package academico.visao;
 
+import academico.modelo.Curso;
+import academico.modelo.CursoDAO;
+import academico.modelo.Disciplina;
+import academico.modelo.DisciplinaDAO;
+import academico.modelo.pg.PostgreSQLDAOFactory;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author alexromanelli
  */
 public class TelaRegistroDisciplina extends javax.swing.JFrame {
+    
+    private static final int OPCAO_INSERIR = 0;
+    private static final int OPCAO_ALTERAR = 1;
+    
+    private int opcao;
+    private ArrayList<Disciplina> colecaoDisciplina;
+    private int indiceDisciplina;
+    private Vector<Curso> colecaoCurso;
+    private DefaultComboBoxModel<Curso> modeloComboBoxCurso;
+    
+    private void carregarCursoDoBD() {
+        colecaoCurso = new Vector<>();
+        try {
+            CursoDAO cursoDAO = PostgreSQLDAOFactory.getCursoDAO();
+            ResultSet rs = cursoDAO.selecionarTodosCursos();
+            rs.beforeFirst();
+            while (rs.next()) {
+                int codigo = rs.getInt(1);
+                String nome = rs.getString(2);
+                int cargaHoraria = rs.getInt(3);
+                String coordenador = rs.getString(4);
+                Curso curso = new Curso(codigo, nome, cargaHoraria, coordenador);
+                colecaoCurso.add(curso);
+            }
+        } catch (SQLException e) {
+            
+        }
+    }
 
+    
+    public TelaRegistroDisciplina(ArrayList<Disciplina> colecaoDisciplina) {
+        this.colecaoDisciplina = colecaoDisciplina;
+        opcao = OPCAO_INSERIR;
+        initComponents();
+        carregarCursoDoBD();
+        modeloComboBoxCurso = new DefaultComboBoxModel<>(colecaoCurso);
+        cbCurso.setModel(modeloComboBoxCurso);
+        tfCodigo.setEnabled(false);
+    }
+    
+    public TelaRegistroDisciplina(ArrayList<Disciplina> colecaoDisciplina, int indiceDisciplina) {
+        this.colecaoDisciplina = colecaoDisciplina;
+        this.indiceDisciplina = indiceDisciplina;
+        opcao = OPCAO_ALTERAR;
+        initComponents();
+        carregarCursoDoBD();
+        modeloComboBoxCurso = new DefaultComboBoxModel<>(colecaoCurso);
+        cbCurso.setModel(modeloComboBoxCurso);
+        tfCodigo.setEnabled(true);
+        tfCodigo.setEditable(false);
+        exibirRegistro();
+    }
+    
+    private void exibirRegistro() {
+        Disciplina d = colecaoDisciplina.get(indiceDisciplina);
+        tfCodigo.setText(Integer.toString(d.getCodDisciplina()));
+        tfNome.setText(d.getNome());
+        tfCargaHoraria.setText(Integer.toString(d.getCargaHoraria()));
+        taEmenta.setText(d.getEmenta());
+        cbCurso.setSelectedIndex(obtemIndiceCurso(d.getCurso()));
+    }
+    
+    private int obtemIndiceCurso(Curso c) {
+        int i = 0;
+        for (Curso curso : colecaoCurso) {
+            if (curso.getCodCurso() == c.getCodCurso())
+                return i;
+            i++;
+        }
+        return -1;
+    }
+    
     /**
      * Creates new form TelaRegistroDisciplina
      */
     public TelaRegistroDisciplina() {
         initComponents();
+        carregarCursoDoBD();
+        modeloComboBoxCurso = new DefaultComboBoxModel<>(colecaoCurso);
+        cbCurso.setModel(modeloComboBoxCurso);
     }
 
     /**
@@ -65,8 +150,18 @@ public class TelaRegistroDisciplina extends javax.swing.JFrame {
         cbCurso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Curso A", "Curso B", "Curso C", "Curso D" }));
 
         bSalvar.setText("Salvar");
+        bSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bSalvarActionPerformed(evt);
+            }
+        });
 
         bCancelar.setText("Cancelar");
+        bCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -136,33 +231,47 @@ public class TelaRegistroDisciplina extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSalvarActionPerformed
+        // obter campos
+        String nome = tfNome.getText();
+        int cargaHoraria = Integer.parseInt(tfCargaHoraria.getText());
+        String ementa = taEmenta.getText();
+        Curso curso = (Curso)cbCurso.getSelectedItem();
+        
+        // registrar
+        DisciplinaDAO disciplinaDAO = PostgreSQLDAOFactory.getDisciplinaDAO();
+        Disciplina d;
+        switch (opcao) {
+            case OPCAO_INSERIR:
+                d = new Disciplina(-1, nome, cargaHoraria, ementa, curso);
+                if (disciplinaDAO.inserirDisciplina(d)) {
+                    colecaoDisciplina.add(d);
+                    TelaListagemDisciplina.INSTANCIA.atualizarTabela();
+                    this.setVisible(false);
+                }
+                break;
+            case OPCAO_ALTERAR:
+                d = colecaoDisciplina.get(indiceDisciplina);
+                d.setNome(nome);
+                d.setCargaHoraria(cargaHoraria);
+                d.setEmenta(ementa);
+                d.setCurso(curso);
+                if (disciplinaDAO.atualizarDisciplina(d)) {
+                    TelaListagemDisciplina.INSTANCIA.atualizarTabela();
+                    this.setVisible(false);
+                }
+                break;
+        }
+    }//GEN-LAST:event_bSalvarActionPerformed
+
+    private void bCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelarActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_bCancelarActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaRegistroDisciplina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaRegistroDisciplina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaRegistroDisciplina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaRegistroDisciplina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

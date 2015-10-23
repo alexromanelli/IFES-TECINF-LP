@@ -62,16 +62,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Registrar disciplina"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bRegistrarDisciplinaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="bAlterarCurso">
       <Properties>
         <Property name="text" type="java.lang.String" value="Alterar disciplina"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bAlterarCursoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="bRemoverDisciplina">
       <Properties>
         <Property name="text" type="java.lang.String" value="Remover disciplina"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bRemoverDisciplinaActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>

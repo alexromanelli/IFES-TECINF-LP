@@ -5,17 +5,31 @@
  */
 package academico.visao;
 
+import academico.modelo.Disciplina;
+import academico.modelo.DisciplinaDAO;
+import academico.modelo.pg.PostgreSQLDAOFactory;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.AbstractTableModel;
+
 /**
  *
  * @author alexromanelli
  */
 public class TelaListagemDisciplina extends javax.swing.JFrame {
+    
+    public static TelaListagemDisciplina INSTANCIA;
 
     /**
      * Creates new form TelaListagemCurso
      */
     public TelaListagemDisciplina() {
+        INSTANCIA = this;
         initComponents();
+    }
+
+    public void atualizarTabela() {
+        ((AbstractTableModel) tDisciplinas.getModel()).fireTableDataChanged();
     }
 
     /**
@@ -37,10 +51,25 @@ public class TelaListagemDisciplina extends javax.swing.JFrame {
         setTitle("Cadastro de disciplina - Listagem");
 
         bRegistrarDisciplina.setText("Registrar disciplina");
+        bRegistrarDisciplina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bRegistrarDisciplinaActionPerformed(evt);
+            }
+        });
 
         bAlterarCurso.setText("Alterar disciplina");
+        bAlterarCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAlterarCursoActionPerformed(evt);
+            }
+        });
 
         bRemoverDisciplina.setText("Remover disciplina");
+        bRemoverDisciplina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bRemoverDisciplinaActionPerformed(evt);
+            }
+        });
 
         tDisciplinas.setModel(new ModeloTabelaDisciplina());
         jScrollPane1.setViewportView(tDisciplinas);
@@ -77,6 +106,49 @@ public class TelaListagemDisciplina extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bRegistrarDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRegistrarDisciplinaActionPerformed
+        TelaRegistroDisciplina trd = 
+                new TelaRegistroDisciplina(
+                        ((ModeloTabelaDisciplina)tDisciplinas.getModel())
+                                .getColecaoDisciplina());
+        trd.setVisible(true);
+    }//GEN-LAST:event_bRegistrarDisciplinaActionPerformed
+
+    private void bAlterarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAlterarCursoActionPerformed
+        ArrayList<Disciplina> colecaoDisciplina = 
+                ((ModeloTabelaDisciplina)tDisciplinas.getModel())
+                    .getColecaoDisciplina();
+        TelaRegistroDisciplina trd = 
+                new TelaRegistroDisciplina(colecaoDisciplina, 
+                        tDisciplinas.getSelectedRow());
+        trd.setVisible(true);
+    }//GEN-LAST:event_bAlterarCursoActionPerformed
+
+    private void bRemoverDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRemoverDisciplinaActionPerformed
+        int indDisciplina = tDisciplinas.getSelectedRow();
+        if (indDisciplina == -1) {
+            JOptionPane.showMessageDialog(null,
+                    "Selecione um registro antes de remover.",
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        ArrayList<Disciplina> colecaoDisciplina = 
+                ((ModeloTabelaDisciplina)tDisciplinas.getModel())
+                    .getColecaoDisciplina();
+        if (JOptionPane.showConfirmDialog(null,
+                "Deseja realmente excluir o registro?",
+                "Confirmação",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+            DisciplinaDAO disciplinaDAO = PostgreSQLDAOFactory.getDisciplinaDAO();
+            if (disciplinaDAO.excluirDisciplina(colecaoDisciplina.get(indDisciplina))) {
+                colecaoDisciplina.remove(indDisciplina);
+                atualizarTabela();
+            }
+        }
+    }//GEN-LAST:event_bRemoverDisciplinaActionPerformed
 
     /**
      * @param args the command line arguments

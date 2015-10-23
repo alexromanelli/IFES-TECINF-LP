@@ -55,5 +55,9 @@ public class Curso {
         this.coordenador = coordenador;
     }
 
-    
+    @Override
+    public String toString() {
+        return nome;
+    }
+
 }

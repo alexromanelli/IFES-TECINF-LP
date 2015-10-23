@@ -57,6 +57,10 @@ public class ModeloTabelaDisciplina extends AbstractTableModel {
             
         }
     }
+    
+    public ArrayList<Disciplina> getColecaoDisciplina() {
+        return colecaoDisciplinas;
+    }
 
     @Override
     public String getColumnName(int column) {
