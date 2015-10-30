@@ -1,0 +1,45 @@
+---------------------------
+ Trabalho de Programação 3
+---------------------------
+
+Criação de programa em Java com interface gráfica e armazenamento em banco de dados com múltiplas tabelas e relacionamentos.
+
++-------+--------------------+
+| Tema: | Torneio de Futebol |
++-------+--------------------+
+
++------------+
+| Descrição: |
++------------+
+
+A atividade consiste em fazer o seguinte:
+
+1) Criar um banco de dados "torneio" no SGBD PostgreSQL e criar as tabelas necessárias com o script disponível na mesma pasta deste enunciado.
+
+2) Criar um projeto de desenvolvimento de programa em Java com o NetBeans e usá-lo como referência para as etapas abaixo.
+
+3) Implementar classes de entidades para cada tabela do banco de dados "torneio", usando a seguinte correspondência entre campos das tabelas e das classes Java:
+
+3.1) PostgreSQL: campo integer ou serial, exceto chaves estrangeiras -> tipo int em Java
+3.2) PostgreSQL: campo integer em chaves estrangeiras -> tipo da classe Java referente à tabela referenciada pela chave estrangeira
+3.3) PostgreSQL: campo varchar ou char, exceto char(1) -> tipo String em Java
+3.3) PostgreSQL: campo char(1) -> tipo char em Java
+3.4) PostgreSQL: campo datetime -> tipo java.util.Date em Java
+
+4) Implementar interfaces e classes em Java para a camada de acesso ao banco de dados PostgreSQL, usando o padrão DAO explicado e exemplificado nas aulas. O acesso a todas as tabelas do banco de dados "torneio" deve ser implementado.
+
+5) Implementar formulários JFrame para listagem e formulários JFrame para registros das seguintes tabelas do banco de dados "torneio":
+
+5.1) torneio
+5.2) time-futebol
+5.3) tecnico
+5.4) jogador
+5.5) arbitro
+5.6) partida
+5.7) gol
+5.8) punicao
+5.9) partida_jogador
+
+Observação: nos formulários JFrame para registros, os campos que indicam chaves estrangeiras devem ser apresentados como objetos JComboBox, sendo que estes devem ser preenchidos com todos os registros das tabelas referenciadas, de modo que o usuário possa selecionar o registro ao qual deseja vincular com a chave estrangeira.
+
+
