@@ -24,7 +24,7 @@ A atividade consiste em fazer o seguinte:
 3.2) PostgreSQL: campo integer em chaves estrangeiras -> tipo da classe Java referente à tabela referenciada pela chave estrangeira
 3.3) PostgreSQL: campo varchar ou char, exceto char(1) -> tipo String em Java
 3.3) PostgreSQL: campo char(1) -> tipo char em Java
-3.4) PostgreSQL: campo datetime -> tipo java.util.Date em Java
+3.4) PostgreSQL: campo datetime ou date ou timestamp -> tipo java.util.Date em Java
 
 4) Implementar interfaces e classes em Java para a camada de acesso ao banco de dados PostgreSQL, usando o padrão DAO explicado e exemplificado nas aulas. O acesso a todas as tabelas do banco de dados "torneio" deve ser implementado.
 
