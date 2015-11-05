@@ -28,7 +28,7 @@ public class TelaRegistroDisciplina extends javax.swing.JFrame {
     private int opcao;
     private ArrayList<Disciplina> colecaoDisciplina;
     private int indiceDisciplina;
-    private Vector<Curso> colecaoCurso;
+    private Vector<Curso> colecaoCurso; // Curso[] colecaoCurso;
     private DefaultComboBoxModel<Curso> modeloComboBoxCurso;
     
     private void carregarCursoDoBD() {
@@ -49,7 +49,6 @@ public class TelaRegistroDisciplina extends javax.swing.JFrame {
             
         }
     }
-
     
     public TelaRegistroDisciplina(ArrayList<Disciplina> colecaoDisciplina) {
         this.colecaoDisciplina = colecaoDisciplina;
@@ -61,14 +60,12 @@ public class TelaRegistroDisciplina extends javax.swing.JFrame {
         tfCodigo.setEnabled(false);
     }
     
-    public TelaRegistroDisciplina(ArrayList<Disciplina> colecaoDisciplina, int indiceDisciplina) {
-        this.colecaoDisciplina = colecaoDisciplina;
+    // sobrecarga de método (construtor)
+    public TelaRegistroDisciplina(ArrayList<Disciplina> colecaoDisciplina, 
+            int indiceDisciplina) {
+        this(colecaoDisciplina);
         this.indiceDisciplina = indiceDisciplina;
         opcao = OPCAO_ALTERAR;
-        initComponents();
-        carregarCursoDoBD();
-        modeloComboBoxCurso = new DefaultComboBoxModel<>(colecaoCurso);
-        cbCurso.setModel(modeloComboBoxCurso);
         tfCodigo.setEnabled(true);
         tfCodigo.setEditable(false);
         exibirRegistro();
