@@ -15,7 +15,9 @@ import torneiofutebol.modelo.DAOFactory;
 import torneiofutebol.modelo.Jogador;
 import torneiofutebol.modelo.JogadorDAO;
 import torneiofutebol.modelo.PosicaoJogador;
+import torneiofutebol.modelo.PosicaoJogadorDAO;
 import torneiofutebol.modelo.TimeFutebol;
+import torneiofutebol.modelo.TimeFutebolDAO;
 
 /**
  *
@@ -54,17 +56,26 @@ public class ModeloTabelaJogador extends AbstractTableModel {
                 char sexo = rs.getString(4).charAt(0);
                 String nacionalidade = rs.getString(5);
                 int idPosicao = rs.getInt(6);
-                String nomePosicao = rs.getString(7);
-                int idTime = rs.getInt(8);
-                String nomeTime = rs.getString(9);
-                String nomeAbreviado = rs.getString(10);
-                String sedePais = rs.getString(11);
-                String sedeEstado = rs.getString(12);
-                String sedeCidade = rs.getString(13);
+//                String nomePosicao = rs.getString(7);
+//                int idTime = rs.getInt(8);
+//                String nomeTime = rs.getString(9);
+//                String nomeAbreviado = rs.getString(10);
+//                String sedePais = rs.getString(11);
+//                String sedeEstado = rs.getString(12);
+//                String sedeCidade = rs.getString(13);
+//                
+//                PosicaoJogador p = new PosicaoJogador(idPosicao, nomePosicao);
+//                TimeFutebol t = new TimeFutebol(idTime, nomeTime, nomeAbreviado, 
+//                        sedePais, sedeEstado, sedeCidade);
+                int idTime = rs.getInt(7);
+                PosicaoJogadorDAO posicaoJogadorDAO = 
+                        DAOFactory.getDefaultDAOFactory().getPosicaoJogadorDAO();
+                PosicaoJogador p = posicaoJogadorDAO.encontrarPosicaoJogador(idPosicao);
                 
-                PosicaoJogador p = new PosicaoJogador(idPosicao, nomePosicao);
-                TimeFutebol t = new TimeFutebol(idTime, nomeTime, nomeAbreviado, 
-                        sedePais, sedeEstado, sedeCidade);
+                TimeFutebolDAO timeFutebolDAO =
+                        DAOFactory.getDefaultDAOFactory().getTimeFutebolDAO();
+                TimeFutebol t = timeFutebolDAO.encontrarTimeFutebol(idTime);
+                
                 Jogador j = new Jogador(idJogador, nomeJogador, dataNascimento, 
                         sexo, nacionalidade, p, t);
                 colecao.add(j);

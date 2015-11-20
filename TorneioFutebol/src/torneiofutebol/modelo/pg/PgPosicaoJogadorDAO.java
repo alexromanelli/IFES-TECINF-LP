@@ -9,8 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import torneiofutebol.modelo.PosicaoJogador;
 import torneiofutebol.modelo.PosicaoJogadorDAO;
@@ -90,6 +88,29 @@ public class PgPosicaoJogadorDAO implements PosicaoJogadorDAO {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, 
                     "Erro ao selecionar registros de posições de jogador.", 
+                    "Erro", 
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public PosicaoJogador encontrarPosicaoJogador(int id) {
+        try {
+            Connection con = PostgreSqlDAOFactory.getConnection();
+            PreparedStatement ps = con.prepareStatement(
+                    "select nome from posicao_jogador "
+                            + "where id_posicao = ?");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String nome = rs.getString(1);
+                PosicaoJogador posicao = new PosicaoJogador(id, nome);
+                return posicao;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, 
+                    "Erro ao selecionar registro de posição de jogador.", 
                     "Erro", 
                     JOptionPane.ERROR_MESSAGE);
         }

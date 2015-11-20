@@ -121,7 +121,7 @@ public class TelaListagemJogador extends javax.swing.JFrame {
         TelaRegistroJogador trj = 
                 new TelaRegistroJogador(((ModeloTabelaJogador)tListagem.getModel())
                         .getColecao());
-        trj.setLocationRelativeTo(null);
+        trj.setLocationRelativeTo(null); // faz a janela ficar centralizada
         trj.setVisible(true);
     }//GEN-LAST:event_bInserirActionPerformed
 

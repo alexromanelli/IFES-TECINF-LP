@@ -5,6 +5,7 @@
  */
 package torneiofutebol;
 
+import javax.swing.UIManager;
 import torneiofutebol.visao.TelaPrincipal;
 
 /**
@@ -29,6 +30,7 @@ public class TorneioFutebol {
                     break;
                 }
             }
+//              javax.swing.UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | 
                 IllegalAccessException | 
                 javax.swing.UnsupportedLookAndFeelException ex) {

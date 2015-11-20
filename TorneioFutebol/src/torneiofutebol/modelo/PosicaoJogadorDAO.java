@@ -16,4 +16,5 @@ public interface PosicaoJogadorDAO {
     public boolean atualizarPosicaoJogador(PosicaoJogador posicaoJogador);
     public boolean excluirPosicaoJogador(PosicaoJogador posicaoJogador);
     public ResultSet selecionarTodasPosicoesJogador();
+    public PosicaoJogador encontrarPosicaoJogador(int id);
 }

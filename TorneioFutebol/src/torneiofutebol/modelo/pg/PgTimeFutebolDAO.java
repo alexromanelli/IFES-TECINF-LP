@@ -108,7 +108,31 @@ public class PgTimeFutebolDAO implements TimeFutebolDAO {
 
     @Override
     public TimeFutebol encontrarTimeFutebol(int idTimeFutebol) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Connection con = PostgreSqlDAOFactory.getConnection();
+            PreparedStatement ps = con.prepareStatement(
+                    "select nome, nome_abreviado, sede_pais, sede_estado, "
+                            + " sede_cidade from time_futebol "
+                                + "where id_time = ?");
+            ps.setInt(1, idTimeFutebol);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String nome = rs.getString(1);
+                String nomeAbreviado = rs.getString(2);
+                String sedePais = rs.getString(3);
+                String sedeEstado = rs.getString(4);
+                String sedeCidade = rs.getString(5);
+                TimeFutebol time = new TimeFutebol(idTimeFutebol, nome, 
+                        nomeAbreviado, sedePais, sedeEstado, sedeCidade);
+                return time;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, 
+                    "Erro ao selecionar registro de time.", 
+                    "Erro", 
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        return null;
     }
     
 }

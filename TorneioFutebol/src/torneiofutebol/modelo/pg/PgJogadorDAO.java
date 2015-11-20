@@ -96,13 +96,21 @@ public class PgJogadorDAO implements JogadorDAO {
     public ResultSet selecionarTodosJogadores() {
         Connection con = PostgreSqlDAOFactory.getConnection();
         try {
+//            PreparedStatement ps = con.prepareStatement(
+//                    "select j.id_jogador, j.nome, j.data_nascimento, j.sexo, j.nacionalidade,"
+//                    + " p.id_posicao, p.nome, t.id_time, t.nome, t.nome_abreviado, "
+//                    + " t.sede_pais, t.sede_estado, t.sede_cidade "
+//                    + " from jogador j "
+//                    + " join posicao_jogador p on (j.posicao_preferencial = p.id_posicao) "
+//                    + " join time_futebol t on (j.id_time = t.id_time) "
+//                    + "order by t.nome, j.nome",
+//                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+//                    ResultSet.CONCUR_UPDATABLE);
             PreparedStatement ps = con.prepareStatement(
-                    "select j.id_jogador, j.nome, j.data_nascimento, j.sexo, j.nacionalidade,"
-                    + " p.id_posicao, p.nome, t.id_time, t.nome, t.nome_abreviado, "
-                    + " t.sede_pais, t.sede_estado, t.sede_cidade "
-                    + " from jogador j "
-                    + " join posicao_jogador p on (j.posicao_preferencial = p.id_posicao) "
-                    + " join time_futebol t on (j.id_time = t.id_time) "
+                    "select id_jogador, j.nome, data_nascimento, sexo, nacionalidade,"
+                    + " posicao_preferencial, t.id_time, t.nome "
+                    + " from jogador j"
+                    + "      join time_futebol t on (j.id_time = t.id_time) "
                     + "order by t.nome, j.nome",
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
