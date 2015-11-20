@@ -115,8 +115,29 @@ public class TelaRegistroJogador extends javax.swing.JFrame {
             tfDataNascimento.setText(sdf.format(j.getDataNascimento()));
             rbMasculino.setSelected(j.getSexo() == 'M');
             tfNacionalidade.setText(j.getNacionalidade());
-            cbPosicaoPreferencial.setSelectedIndex(WIDTH);
+            cbPosicaoPreferencial.setSelectedIndex(obterIndicePosicao(j.getPosicaoPreferencial()));
+            cbTimeFutebol.setSelectedIndex(obterIndiceTime(j.getTime()));
         }
+    }
+    
+    private int obterIndicePosicao(PosicaoJogador p) {
+        int i = 0;
+        for (PosicaoJogador pos : colecaoPosicaoJogador) {
+            if (pos.getIdPosicao() == p.getIdPosicao())
+                return i;
+            i++;
+        }
+        return -1;
+    }
+    
+    private int obterIndiceTime(TimeFutebol t) {
+        int i = 0;
+        for (TimeFutebol time : colecaoTimeFutebol) {
+            if (time.getIdTime() == t.getIdTime())
+                return i;
+            i++;
+        }
+        return -1;
     }
 
     /**

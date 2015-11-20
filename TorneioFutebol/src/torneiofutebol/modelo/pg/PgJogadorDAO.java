@@ -77,7 +77,7 @@ public class PgJogadorDAO implements JogadorDAO {
                     + "id_time = ? "
                     + "where id_jogador = ?");
             ps.setString(1, jogador.getNome());
-            ps.setDate(2, (Date)jogador.getDataNascimento());
+            ps.setDate(2, new Date(jogador.getDataNascimento().getTime()));
             ps.setString(3, Character.toString(jogador.getSexo()));
             ps.setString(4, jogador.getNacionalidade());
             ps.setInt(5, jogador.getPosicaoPreferencial().getIdPosicao());
