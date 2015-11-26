@@ -32,6 +32,16 @@
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator1">
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="miPesquisaPessoa">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Pesquisa por pessoa"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miPesquisaPessoaActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator2">
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="miSair">
               <Properties>
                 <Property name="mnemonic" type="int" value="115"/>

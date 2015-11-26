@@ -33,6 +33,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         miCadastroJogadores = new javax.swing.JMenuItem();
         miCadastroPosicoesJogo = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        miPesquisaPessoa = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
         miSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,6 +59,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         miCadastroPosicoesJogo.setText("Cadastro de Posições de Jogo");
         jMenu1.add(miCadastroPosicoesJogo);
         jMenu1.add(jSeparator1);
+
+        miPesquisaPessoa.setText("Pesquisa por pessoa");
+        miPesquisaPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miPesquisaPessoaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(miPesquisaPessoa);
+        jMenu1.add(jSeparator2);
 
         miSair.setMnemonic('s');
         miSair.setText("Sair");
@@ -85,6 +96,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tlj.setLocationRelativeTo(null);
         tlj.setVisible(true);
     }//GEN-LAST:event_miCadastroJogadoresActionPerformed
+
+    private void miPesquisaPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miPesquisaPessoaActionPerformed
+        TelaPesquisaPessoa tpp = new TelaPesquisaPessoa();
+        tpp.setLocationRelativeTo(null);
+        tpp.setVisible(true);
+    }//GEN-LAST:event_miPesquisaPessoaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -125,9 +142,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JMenuItem miCadastroJogadores;
     private javax.swing.JMenuItem miCadastroPosicoesJogo;
     private javax.swing.JMenuItem miCadastroTimes;
+    private javax.swing.JMenuItem miPesquisaPessoa;
     private javax.swing.JMenuItem miSair;
     // End of variables declaration//GEN-END:variables
 }
