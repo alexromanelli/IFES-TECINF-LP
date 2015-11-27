@@ -147,7 +147,7 @@ public class PgJogadorDAO implements JogadorDAO {
                     + "where (upper(j.nome) like ?) "
                     + "  and (j.data_nascimento between ? and ?) "
                     + "  and (j.sexo = ? or sexo = ?)"
-                    + "  and (j.nacionalidade like ?)"
+                    + "  and (upper(j.nacionalidade) like ?)"
                     + "order by j.nome",
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
