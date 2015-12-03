@@ -19,8 +19,9 @@ public interface JogadorDAO {
     public boolean atualizarJogador(Jogador jogador);
     public ResultSet selecionarTodosJogadores();
     public Jogador encontrarJogador(int idJogador);
-    public ArrayList<Jogador> selecionarJogadoresPorCriterios(boolean restringirNome, String nome,
+    public ArrayList<Jogador> selecionarJogadoresPorCriterios(
+            boolean restringirNome, String nome,
             boolean restringirDataNascimento, Date dataInicio, Date dataFim,
-            boolean restringirSexo, char sexo, boolean restringirNacionalidade,
-            String nacionalidade);
+            boolean restringirSexo, char sexo, 
+            boolean restringirNacionalidade, String nacionalidade);
 }

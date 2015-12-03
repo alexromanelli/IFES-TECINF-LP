@@ -5,10 +5,23 @@
  */
 package torneiofutebol.modelo;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  *
  * @author alexromanelli
  */
 public interface TecnicoDAO {
-    
+    public boolean inserirTecnico(Tecnico tecnico);
+    public boolean excluirTecnico(Tecnico tecnico);
+    public boolean atualizarTecnico(Tecnico tecnico);
+    public ResultSet selecionarTodosTecnicos();
+    public Tecnico encontrarTecnico(int idTecnico);
+    public ArrayList<Tecnico> selecionarTecnicosPorCriterios(
+            boolean restringirNome, String nome,
+            boolean restringirDataNascimento, Date dataInicio, Date dataFim,
+            boolean restringirSexo, char sexo, 
+            boolean restringirNacionalidade, String nacionalidade);
 }

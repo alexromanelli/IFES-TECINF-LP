@@ -134,7 +134,12 @@ public class PgJogadorDAO implements JogadorDAO {
     }
 
     @Override
-    public ArrayList<Jogador> selecionarJogadoresPorCriterios(boolean restringirNome, String nome, boolean restringirDataNascimento, java.util.Date dataInicio, java.util.Date dataFim, boolean restringirSexo, char sexo, boolean restringirNacionalidade, String nacionalidade) {
+    public ArrayList<Jogador> selecionarJogadoresPorCriterios(
+            boolean restringirNome, String nome, 
+            boolean restringirDataNascimento, java.util.Date dataInicio, 
+            java.util.Date dataFim, 
+            boolean restringirSexo, char sexo, 
+            boolean restringirNacionalidade, String nacionalidade) {
         Connection con = PostgreSqlDAOFactory.getConnection();
         try {
             PreparedStatement ps = con.prepareStatement(
@@ -144,9 +149,9 @@ public class PgJogadorDAO implements JogadorDAO {
                     + " from jogador j "
                     + " join posicao_jogador p on (j.posicao_preferencial = p.id_posicao) "
                     + " join time_futebol t on (j.id_time = t.id_time) "
-                    + "where (upper(j.nome) like ?) "
+                    + "where (upper(j.nome) like ?) " // '%RO%'
                     + "  and (j.data_nascimento between ? and ?) "
-                    + "  and (j.sexo = ? or sexo = ?)"
+                    + "  and (j.sexo = ? or j.sexo = ?)"
                     + "  and (upper(j.nacionalidade) like ?)"
                     + "order by j.nome",
                     ResultSet.TYPE_SCROLL_INSENSITIVE,

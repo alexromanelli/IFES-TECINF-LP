@@ -67,7 +67,7 @@ public class PostgreSqlDAOFactory extends DAOFactory {
 
     @Override
     public TecnicoDAO getTecnicoDAO() {
-        return null;
+        return new PgTecnicoDAO();
     }
 
     @Override

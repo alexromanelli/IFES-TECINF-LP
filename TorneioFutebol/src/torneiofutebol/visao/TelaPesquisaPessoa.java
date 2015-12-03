@@ -79,6 +79,11 @@ public class TelaPesquisaPessoa extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tListagem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tListagemMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tListagem);
 
         ckbRestringirNomes.setMnemonic('n');
@@ -271,13 +276,25 @@ public class TelaPesquisaPessoa extends javax.swing.JFrame {
                 ckbRestringirSexo.isSelected(), sexo,
                 ckbRestringirNacionalidade.isSelected(), nacionalidade);
         
+        ArrayList<Tecnico> tecnicos = tecnicoDAO.selecionarTecnicosPorCriterios(
+                ckbRestringirNomes.isSelected(), nome,
+                ckbRestringirDataNascimento.isSelected(), dataInicio, dataFim,
+                ckbRestringirSexo.isSelected(), sexo,
+                ckbRestringirNacionalidade.isSelected(), nacionalidade);
+        
 
         // exibir dados
         ArrayList<Pessoa> colecao = ((ModeloTabelaPessoa)tListagem.getModel()).getColecao();
         colecao.clear();
         colecao.addAll(jogadores);
+        colecao.addAll(tecnicos);
+        //colecao.addAll(arbitros);
         ((AbstractTableModel)tListagem.getModel()).fireTableDataChanged();
     }//GEN-LAST:event_bPesquisarActionPerformed
+
+    private void tListagemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tListagemMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tListagemMouseClicked
 
     /**
      * @param args the command line arguments
